@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required Meta Tags Always Come First -->
@@ -29,8 +29,8 @@
       <script src="assets\vendor\hs-navbar-vertical-aside\hs-navbar-vertical-aside-mini-cache.js"></script>
     
 
-    <!-- ========== START LAYOUT CONTENT ========== -->
-    <div th:fragment="html_layout">
+    <!-- ONLY DEV -->
+    
       <!-- Builder -->
       <div id="styleSwitcherDropdown" class="hs-unfold-content sidebar sidebar-bordered sidebar-box-shadow" style="width: 35rem;">
         <div class="card card-lg border-0 h-100">
@@ -591,187 +591,331 @@
       </form>
     </div>
     <!-- End Search Form -->
-  </div>
-<!-- END LAYOUT -->
-<!-- ========== START MAIN CONTENT ========== -->
+
+    <!-- ========== HEADER ========== -->
+    
+
+    
+
+    
+    <!-- ========== END HEADER ========== -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <!-- Navbar Vertical -->
+    
+
+    
+    <!-- End Navbar Vertical -->
+
     <main id="content" role="main" class="main pointer-event">
-
-      <div class="content container-fluid">
-        <!-- Stats -->
-<div class="row gx-2 gx-lg-3">
-  <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-    <!-- Card -->
-    <a class="card card-hover-shadow h-100" href="#">
-      <div class="card-body">
-        <h6 class="card-subtitle">Total Projects</h6>
-
-        <div class="row align-items-center gx-2 mb-1">
-          <div class="col-6">
-            <span class="card-title h2">50</span>
-          </div>
-
-          <div class="col-6">
-            <!-- Chart -->
-            <div class="chartjs-custom" style="height: 3rem;">
-              <canvas class="js-chart" data-hs-chartjs-options='{
-                        "type": "line",
-                        "data": {
-                           "labels": ["1 May","2 May","3 May","4 May","5 May","6 May","7 May"],
-                           "datasets": [{
-                            "data": [10,15,12,17,19,22,25],
-                            "backgroundColor": ["rgba(55, 125, 255, 0)", "rgba(255, 255, 255, 0)"],
-                            "borderColor": "#377dff",
-                            "borderWidth": 2,
-                            "pointRadius": 0,
-                            "pointHoverRadius": 0
-                          }]
-                        },
-                        "options": {
-                           "scales": {
-                             "yAxes": [{ "display": false }],
-                             "xAxes": [{ "display": false }]
-                           },
-                          "hover": { "mode": "nearest", "intersect": false },
-                          "tooltips": { "postfix": " items", "hasIndicator": true, "intersect": false }
-                        }
-                      }'>
-              </canvas>
+        <div class="content container-fluid">
+            <!-- Page Header -->
+            <div class="page-header">
+              <div class="row align-items-end">
+                <div class="col-sm mb-2 mb-sm-0">
+                  <h1 class="page-header-title">Users Management</h1>
+                </div>
+    
+                <div class="col-sm-auto">
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">
+                    <i class="tio-add mr-1"></i> Add User
+                  </button>
+                </div>
+              </div>
+              <!-- End Row -->
             </div>
-            <!-- End Chart -->
-          </div>
-        </div>
-        <!-- End Row -->
+            <!-- End Page Header -->
+            <!-- Card -->
+            <div class="card">
+              <!-- Header -->
+              <div class="card-header">
+                <div class="row justify-content-between align-items-center flex-grow-1">
+                  <div class="col-sm-6 col-md-4 mb-3 mb-sm-0">
+                    <form>
+                      <!-- Search -->
+                      <div class="input-group input-group-merge input-group-flush">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="tio-search"></i>
+                          </div>
+                        </div>
+                        <input id="datatableSearch" type="search" class="form-control" placeholder="Search" aria-label="Search users">
+                      </div>
+                      <!-- End Search -->
+                    </form>
+                  </div>
+    
+                  <div class="col-sm-6">
+                    <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+                      <!-- End Datatable Info -->
+    
+                      <!-- Unfold -->
+                      <div class="hs-unfold mr-2">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle" href="javascript:;" data-hs-unfold-options='{
+                             "target": "#usersExportDropdown",
+                             "type": "css-animation"
+                           }'>
+                          <i class="tio-download-to mr-1"></i> Export
+                        </a>
+    
+                        <div id="usersExportDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
+                          <span class="dropdown-header">Download options</span>
+                          <a id="export-excel" class="dropdown-item" href="javascript:;">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\brands\excel.svg" alt="Image Description">
+                            Excel
+                          </a>
+                          <a id="export-csv" class="dropdown-item" href="javascript:;">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\components\placeholder-csv-format.svg" alt="Image Description">
+                            .CSV
+                          </a>
+                          <a id="export-pdf" class="dropdown-item" href="javascript:;">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2" src="assets\svg\brands\pdf.svg" alt="Image Description">
+                            PDF
+                          </a>
+                        </div>
+                      </div>
+                      <!-- End Unfold -->
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- End Row -->
+              </div>
+              <!-- End Header -->
+    
+              <!-- Table -->
+              <div class="table-responsive datatable-custom">
+                <table id="datatable" class="table table-lg table-borderless table-thead-bordered table-nowrap table-align-middle card-table" 
+       data-hs-datatables-options='{
+         "columnDefs": [{
+            "targets": [6], 
+            "orderable": false
+          }],
+         "order": [],
+         "info": {
+           "totalQty": "#datatableWithPaginationInfoTotalQty"
+         },
+         "search": "#datatableSearch",
+         "entries": "#datatableEntries",
+         "pageLength": 5,
+         "isResponsive": true,
+         "isShowPaging": true,
+         "pagination": "datatablePagination"
+       }'>
+  <thead class="thead-light">
+    <tr>
+      <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td>1</td>
+      <td>John Doe</td>
+      <td>john.doe@example.com</td>
+      <td><span class="badge bg-primary">MANAGER</span></td>
+      <td>2025-03-30</td>
+      <td>
+          <a class="btn btn-sm btn-success" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+            <i class="tio-edit"></i> Edit
+          </a>
+          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUserModal">
+            <i class="tio-delete"></i> Delete
+          </button>
+      </td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Jane Smith</td>
+    <td>jane.smith@example.com</td>
+    <td><span class="badge bg-secondary">FIELD_STAFF</span></td>
+    <td>2025-03-28</td>
+    <td>
+        <a class="btn btn-sm btn-success" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+          <i class="tio-edit"></i> Edit
+        </a>
+        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUserModal">
+          <i class="tio-delete"></i> Delete
+        </button>
+    </td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Emily Johnson</td>
+    <td>emily.johnson@example.com</td>
+    <td><span class="badge bg-warning">PLANNER</span></td>
+    <td>2025-03-25</td>
+    <td>
+        <a class="btn btn-sm btn-success" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+          <i class="tio-edit"></i> Edit
+        </a>
+        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUserModal">
+          <i class="tio-delete"></i> Delete
+        </button>
+    </td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Michael Brown</td>
+    <td>michael.brown@example.com</td>
+    <td><span class="badge bg-success">ACCOUNTANT</span></td>
+    <td>2025-03-20</td>
+    <td>
+        <a class="btn btn-sm btn-success" href="javascript:;" data-toggle="modal" data-target="#editUserModal">
+          <i class="tio-edit"></i> Edit
+        </a>
+        <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUserModal">
+          <i class="tio-delete"></i> Delete
+        </button>
+    </td>
+</tr>
+  </tbody>
+</table>
 
-        <span class="badge badge-soft-success">
-          <i class="tio-trending-up"></i> 8.2%
-        </span>
-        <span class="text-body font-size-sm ml-1">from 30</span>
+              </div>
+              <!-- End Table -->
+    
+              <!-- Footer -->
+              <div class="card-footer">
+                <!-- Pagination -->
+                <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+                  <div class="col-sm mb-2 mb-sm-0">
+                    <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                      <span class="mr-2">Showing:</span>
+    
+                      <!-- Select -->
+                      <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
+                                "minimumResultsForSearch": "Infinity",
+                                "customClass": "custom-select custom-select-sm custom-select-borderless",
+                                "dropdownAutoWidth": true,
+                                "width": true
+                              }'>
+                              <option value="5" selected>5</option>
+                              <option value="10">10</option>
+                              <option value="15">15</option>
+                              <option value="20">20</option>
+                              <option value="25">25</option>
+                              <option value="30">30</option>
+                      </select>
+                      <!-- End Select -->
+    
+                      <span class="text-secondary mr-2">of</span>
+    
+                      <!-- Pagination Quantity -->
+                      <span id="datatableWithPaginationInfoTotalQty"></span>
+                    </div>
+                  </div>
+    
+                  <div class="col-sm-auto">
+                    <div class="d-flex justify-content-center justify-content-sm-end">
+                      <!-- Pagination -->
+                      <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Pagination -->
+              </div>
+              <!-- End Footer -->
+            </div>
+            <!-- End Card -->
+          </div>
+          <!-- End Content -->
+    <!-- Edit User Modal -->
+    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form id="editUserForm">
+                      <div class="form-group">
+                          <label for="editFullName">Full Name</label>
+                          <input type="text" class="form-control" id="editFullName" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="editEmail">Email</label>
+                          <input type="email" class="form-control" id="editEmail" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="editRole">Role</label>
+                          <select class="form-control" id="editRole" required>
+                              <option value="MANAGER">Manager</option>
+                              <option value="FIELD_STAFF">Field Staff</option>
+                              <option value="PLANNER">Planner</option>
+                              <option value="ACCOUNTANT">Accountant</option>
+                          </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </form>
+              </div>
+          </div>
       </div>
-    </a>
-    <!-- End Card -->
   </div>
 
-  <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-    <!-- Card -->
-    <a class="card card-hover-shadow h-100" href="#">
-      <div class="card-body">
-        <h6 class="card-subtitle">Total Risks</h6>
-
-        <div class="row align-items-center gx-2 mb-1">
-          <div class="col-6">
-            <span class="card-title h2">250</span>
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="deleteUserModalLabel">Confirm Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  Are you sure you want to delete this user?
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-danger">Delete</button>
+              </div>
           </div>
-
-          <div class="col-6">
-            <!-- Chart -->
-            <div class="chartjs-custom" style="height: 3rem;">
-              <canvas class="js-chart" data-hs-chartjs-options='{
-                        "type": "line",
-                        "data": {
-                           "labels": ["1 May","2 May","3 May","4 May","5 May","6 May","7 May"],
-                           "datasets": [{
-                            "data": [50,42,32,37,29,18,25],
-                            "backgroundColor": ["rgba(55, 125, 255, 0)", "rgba(255, 255, 255, 0)"],
-                            "borderColor": "#377dff",
-                            "borderWidth": 2,
-                            "pointRadius": 0,
-                            "pointHoverRadius": 0
-                          }]
-                        },
-                        "options": {
-                           "scales": {
-                             "yAxes": [{ "display": false }],
-                             "xAxes": [{ "display": false }]
-                           },
-                          "hover": { "mode": "nearest", "intersect": false },
-                          "tooltips": { "postfix": " items", "hasIndicator": true, "intersect": false }
-                        }
-                      }'>
-              </canvas>
-            </div>
-            <!-- End Chart -->
-          </div>
-        </div>
-        <!-- End Row -->
-
-        <span class="badge badge-soft-danger">
-          <i class="tio-trending-down"></i> 38.6%
-        </span>
-        <span class="text-body font-size-sm ml-1">from 230</span>
       </div>
-    </a>
-    <!-- End Card -->
   </div>
-
-  <div class="col-sm-6 col-lg-3 mb-3 mb-lg-5">
-    <!-- Card -->
-    <a class="card card-hover-shadow h-100" href="#">
-      <div class="card-body">
-        <h6 class="card-subtitle">Total Costs</h6>
-
-        <div class="row align-items-center gx-2 mb-1">
-          <div class="col-6">
-            <span class="card-title h2">1,350</span>
+    <!--Modal Add Project-->
+    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form id="addUserForm">
+                      <div class="form-group">
+                          <label for="fullName">Full Name</label>
+                          <input type="text" class="form-control" id="fullName" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="email" class="form-control" id="email" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="role">Role</label>
+                          <select class="form-control" id="role" required>
+                              <option value="MANAGER">Manager</option>
+                              <option value="FIELD_STAFF">Field Staff</option>
+                              <option value="PLANNER">Planner</option>
+                              <option value="ACCOUNTANT">Accountant</option>
+                          </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </form>
+              </div>
           </div>
-
-          <div class="col-6">
-            <!-- Chart -->
-            <div class="chartjs-custom" style="height: 3rem;">
-              <canvas class="js-chart" data-hs-chartjs-options='{
-                        "type": "line",
-                        "data": {
-                           "labels": ["1 May","2 May","3 May","4 May","5 May","6 May","7 May"],
-                           "datasets": [{
-                            "data": [400,350,230,380,200,320,250],
-                            "backgroundColor": ["rgba(55, 125, 255, 0)", "rgba(255, 255, 255, 0)"],
-                            "borderColor": "#377dff",
-                            "borderWidth": 2,
-                            "pointRadius": 0,
-                            "pointHoverRadius": 0
-                          }]
-                        },
-                        "options": {
-                           "scales": {
-                             "yAxes": [{ "display": false }],
-                             "xAxes": [{ "display": false }]
-                           },
-                          "hover": { "mode": "nearest", "intersect": false },
-                          "tooltips": { "postfix": " orders", "hasIndicator": true, "intersect": false }
-                        }
-                      }'>
-              </canvas>
-            </div>
-            <!-- End Chart -->
-          </div>
-        </div>
-        <!-- End Row -->
-
-        <span class="badge badge-soft-danger">
-          <i class="tio-trending-down"></i> 5.5%
-        </span>
-        <span class="text-body font-size-sm ml-1">from 1,280</span>
       </div>
-    </a>
-    <!-- End Card -->
   </div>
-</div>
-<!-- End Stats -->
-
-        <div class="row justify-content-sm-center text-center py-10">
-          <div class="col-sm-7 col-md-5">
-            <img class="img-fluid mb-5" src="assets\svg\illustrations\graphs.svg" alt="Image Description" style="max-width: 21rem;">
-
-            <h1 class="fw-bold text-primary">Welcome to Risk & Project Management</h1>
-            <p class="text-muted">Monitor risks, analyze data, and ensure project success efficiently.</p>
-        
-          <div class="d-flex justify-content-center gap-3 mt-4">
-        </div>
-          </div>
-        </div>
-        <!-- End Row -->
-      </div>
-      <!-- End Content -->
-
     </main>
     <!-- ========== END MAIN CONTENT ========== -->
 
